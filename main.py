@@ -8,6 +8,10 @@ req.encoding = req.apparent_encoding # 日本語の文字化け防止
 # HTMLの解析
 bsObj = BeautifulSoup(req.text,"html.parser")
 
+map = bsObj.find(class_="map")
+map = map.find("img")
+print(map)
+
 items = bsObj.find(id="syosai_4").find_all(class_="jisyo_contents")
 
 for item in items:
