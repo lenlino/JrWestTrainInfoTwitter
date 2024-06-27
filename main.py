@@ -27,7 +27,8 @@ def check_traffic_info():
 
     # 画像の取得
     map = bsObj.find(class_="map")
-    map = "https://trafficinfo.westjr.co.jp/" + map.find("img")["src"]
+    if map is not None:
+        map = "https://trafficinfo.westjr.co.jp/" + map.find("img")["src"]
     print(map)
 
     # 運転情報の取得
