@@ -15,8 +15,7 @@ load_dotenv()
 consumer_key = os.environ.get("consumer_key", "")
 consumer_secret = os.environ.get("consumer_secret", "")
 access_token = os.environ.get("access_token", "")
-access_token_secret = os.environ.get("consumer_key", "")
-
+access_token_secret = os.environ.get("access_token_secret", "")
 
 def check_traffic_info():
     # HTMLの取得(GET)
@@ -65,7 +64,8 @@ def tweet(text, img=None):
             access_token_secret=access_token_secret
         )
         api = tweepy.API(auth)
-        media_id = api.media_upload(filename="traffic.gif", file=io.BytesIO(requests.get(img).content)).media_id
+        media_id = api.media_upload(filename="traffic.gif", file=io.BytesIO(requests.get(img).content),
+                                    chunked=True).media_id
 
     n = 140
     reply_tweet_id = ""
@@ -104,7 +104,6 @@ def tweet(text, img=None):
 
 def reset_tweeted_text():
     tweeted_texts.clear()
-
 
 schedule.every(1).days.do(reset_tweeted_text)
 schedule.every(5).minutes.do(check_traffic_info)
