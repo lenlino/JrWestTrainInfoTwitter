@@ -78,11 +78,13 @@ def tweet(text, img=None):
                     text=tweet_temp_text,
                     media_ids=[media_id]
                 )
+                time.sleep(1)
             else:
                 response = client.create_tweet(
                     text=tweet_temp_text,
                     in_reply_to_tweet_id=reply_tweet_id
                 )
+                time.sleep(1)
             reply_tweet_id = response.data["id"]
             tweet_temp_text = i
         else:
@@ -93,11 +95,13 @@ def tweet(text, img=None):
             text=tweet_temp_text,
             media_ids=[media_id]
         )
+        time.sleep(1)
     else:
         response = client.create_tweet(
             text=tweet_temp_text,
             in_reply_to_tweet_id=reply_tweet_id
         )
+        time.sleep(1)
 
     print(f"https://twitter.com/user/status/{response.data['id']}")
 
