@@ -67,6 +67,7 @@ def tweet(text, img=None):
         api = tweepy.API(auth)
         media_id = api.media_upload(filename="traffic.gif", file=io.BytesIO(requests.get(img).content),
                                     chunked=True).media_id
+        time.sleep(1)
 
     n = 140
     reply_tweet_id = ""
