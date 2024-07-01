@@ -45,8 +45,11 @@ def check_traffic_info():
             continue
         tweeted_texts.append(text)
         text += "https://trafficinfo.westjr.co.jp/kinki.html"
-        tweet(text, img=map)
-
+        try:
+            tweet(text, img=map)
+        except tweepy.errors.TooManyRequests:
+            print("リクエストが多すぎるため20分停止します")
+            time.sleep(20*60)
 
 def tweet(text, img=None):
     client = tweepy.Client(
